@@ -1,0 +1,66 @@
+---
+- name: Intro to Ansible Playbooks
+  hosts: all
+  tasks:
+    - name: Add the user 'foo'
+      ansible.builtin.user:
+        name: foo
+        state: present
+      become: yes
+      become_method: sudo
+
+    - name: Upgrade all packages using dnf
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+      become: yes
+
+    - name: Install the latest version of vim
+      ansible.builtin.dnf:
+        name: vim
+        state: latest
+      become: yes
+
+    - name: Install the latest version of nano
+      ansible.builtin.dnf:
+        name: nano
+        state: latest
+      become: yes
+
+    - name: Install the latest version of Apache
+      ansible.builtin.dnf:
+        name: httpd
+        state: latest
+      become: yes
+
+- name: Create Web Root and Copy index.html
+  hosts: host1 # Du musst hosts hier entsprechend anpassen, z.B. auf den Namen oder die Gruppe deines Ziel-Servers
+  become: yes
+  tasks:
+    - name: Create Web Root Directory
+      ansible.builtin.file:
+        path: /var/www/html  # Passe den Pfad entsprechend deinem Web-Root an
+        state: directory
+
+    - name: Copy index.html to Web Root
+      ansible.builtin.copy:
+        src: /mnt/c/Users/Al Mohanad Ilewi/Desktop/Ansible/ansible-intro/index.html  # Passe den Pfad zur index.html auf deinem Control Host an
+        dest: /var/www/html/index.html  # Passe den Pfad im Web-Root an
+      become: yes
+
+
+    - name: Copy update script to the server
+      copy:
+      src: /path/to/your/update-script.sh
+      dest: /usr/local/bin/update-script.sh
+      mode: '0755' # Make the script executable
+    become: yes
+
+- name: Create a Cron Job to run the update script every hour
+  cron:
+    name: "GitOps Update"
+    minute: 0
+    hour: "*"
+    job: "/usr/local/bin/update-script.sh"
+  become: yes
+
