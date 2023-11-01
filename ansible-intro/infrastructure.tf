@@ -1,6 +1,3 @@
-
-
-
 terraform {
   required_version = ">= 1.0"
 
@@ -16,8 +13,6 @@ provider "aws" {
   region  = "eu-central-1"
   profile = "techstarter"
 }
-
-
 resource "aws_security_group" "sg" {
   name        = "ansible_instance_sg"
   description = "Allow SSH, HTTP inbound traffic"

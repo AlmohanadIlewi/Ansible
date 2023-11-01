@@ -49,18 +49,18 @@
       become: yes
 
 
-    - name: Copy update script to the server
-      copy:
-      src: /path/to/your/update-script.sh
-      dest: /usr/local/bin/update-script.sh
-      mode: '0755' # Make the script executable
-    become: yes
+#     - name: Copy update script to the server
+#       copy:
+#       src: /path/to/your/update-script.sh
+#       dest: /usr/local/bin/update-script.sh
+#       mode: '0755' # Make the script executable
+#     become: yes
 
-- name: Create a Cron Job to run the update script every hour
-  cron:
-    name: "GitOps Update"
-    minute: 0
-    hour: "*"
-    job: "/usr/local/bin/update-script.sh"
-  become: yes
+# - name: Create a Cron Job to run the update script every hour
+#   cron:
+#     name: "GitOps Update"
+#     minute: 0
+#     hour: "*"
+#     job: "/usr/local/bin/update-script.sh"
+#   become: yes
 
