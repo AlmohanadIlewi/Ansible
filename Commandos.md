@@ -19,6 +19,3 @@
 
    ansible-playbook -i hosts playbook.yaml 
 
-http://3.66.86.53
-
-  
