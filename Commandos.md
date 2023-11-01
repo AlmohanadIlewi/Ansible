@@ -7,6 +7,7 @@
  $ sudo apt install ansible
 
 ansible --version
+
 ansible -i hosts all -m ping 
 
    ansible-playbook -i hosts playbook.yaml 
